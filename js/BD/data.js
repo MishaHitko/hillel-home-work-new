@@ -1,0 +1,16 @@
+export const CATEGORIES = ['Телефоны','Ноутбуки','Планшеты','Телевизоры'];
+export const GOODS = [{category: 'Телефоны', brand: 'Apple', price: '1000$',color: 'красный', amount: 3, id: 1},
+    {category: 'Телефоны', brand: 'Samsung', price: '1000$', color: 'черный', amount: 3, id: 2},
+    {category: 'Телефоны', brand: 'Xiaomi', price: '500$', color: 'серый', amount: 2, id: 3},
+    {category: 'Телефоны', brand: 'LG', price: '800$', color: 'черный', amount: 9, id: 4},
+    {category: 'Ноутбуки', brand: 'Apple', price: '2000$', color: 'черный', amount: 8, id: 5},
+    {category: 'Ноутбуки', brand: 'Samsung', price: '1500$', color: 'голубой', amount: 7, id: 6},
+    {category: 'Ноутбуки', brand: 'Xiaomi', price: '800$', color: 'серый', amount: 3, id: 7},
+    {category: 'Ноутбуки', brand: 'LG', price: '1000$', color: 'красный', amount: 1, id: 8},
+    {category: 'Планшеты', brand: 'Apple', price: '800$', color: 'черный', amount: 2, id: 9},
+    {category: 'Планшеты', brand: 'Samsung', price: '600$', color: 'серый', amount: 6, id: 10},
+    {category: 'Планшеты', brand: 'Xiaomi', price: '300$', color: 'красный', amount: 5, id: 11},
+    {category: 'Планшеты', brand: 'LG', price: '500$', color: 'голубой', amount: 4, id: 12},
+    {category: 'Телевизоры', brand: 'Samsung', price: '1500$', color: 'серый', amount: 8, id: 13},
+    {category: 'Телевизоры', brand: 'Xiaomi', price: '800$', color: 'красный', amount: 6, id: 14},
+    {category: 'Телевизоры', brand: 'LG', price: '1000$', color: 'черный', amount: 5, id: 15}];

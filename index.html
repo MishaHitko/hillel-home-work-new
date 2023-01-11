@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" href="style.css">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<button class="btn-basket">Мои заказы</button>
+<div class="basket-message form-none">Ваша корзина пуста!</div>
+<ul class="order-list form-none"></ul>
+<div class="blockShop"></div>
+<form class="form-none">
+    <label>
+        Введите вашу Фамилиию, Имя и Отчество:
+        <input type="text" class="nameLastname" required>
+        <div></div>
+    </label>
+    <p>
+        <label>
+            Выберите свой город:
+            <select>
+                <option value="Киев">
+                    Киев
+                </option>
+                <option value="Одесса">
+                    Одесса
+                </option>
+                <option value="Днепр">
+                    Днепр
+                </option>
+                <option value="Харьков">
+                    Харьков
+                </option>
+                <option value="Львов">
+                    Львов
+                </option>
+            </select>
+        </label>
+    </p>
+    <label>
+        Отделение Новый Почты:
+        <input type="text" class="newPost" required>
+        <div></div>
+    </label>
+    <h3>Оплата:</h3>
+    <label>Наличные:
+        <input value="cash" class="payment" type="radio" name="payment" checked>
+    </label>
+    <div>
+        <label>Карта:
+            <input value="card" class="payment" type="radio" name="payment">
+            <div></div>
+        </label>
+    </div>
+    <label>
+        Кол-во единиц товара:
+        <input type="number" class="amount" min="1" value="1">
+        <div></div>
+    </label>
+    <label>
+        Коментарий к заказу: <br>
+        <textarea></textarea>
+    </label>
+    <button type="submit" class="btnBuy">Купить</button>
+</form>
+
+<script type="module" src="./js/index.js"></script>
+</body>
+</html>

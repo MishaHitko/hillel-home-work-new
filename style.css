@@ -1,0 +1,66 @@
+.blockShop {
+    display: flex;
+    align-items: center;
+}
+.blockShop__blocks-items {
+    margin: 20px 40px;
+}
+.blockShop__blocks-items div {
+    border: 1px solid skyblue;
+    background-color: skyblue;
+    border-radius: 10px;
+    margin: 10px 10px;
+    padding: 20px;
+}
+.blockShop__blocks-items:nth-child(2) {
+    display: flex;
+}
+.blockShop__blocks-items:nth-child(2) div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.modal-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.modal-body {
+    background-color: skyblue;
+    position: fixed;
+    padding: 20px 100px;
+    border-radius: 10px;
+    top: 20px;
+}
+.text-modal {
+    font-size: 20px;
+}
+.close {
+    cursor: pointer;
+    font-size: 20px;
+    position: absolute;
+    top: 0;
+    right: 10px;
+}
+.form-none {
+    display: none;
+}
+.form-on {
+    display: block;
+}
+.invalidInput {
+    border: 1px solid red;
+}
+.invalidText {
+    color: red;
+}
+.btn-basket {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    border-radius: 10px;
+    background-color: skyblue;
+    border: none;
+    padding: 20px;
+}
