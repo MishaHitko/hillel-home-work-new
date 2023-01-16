@@ -11,15 +11,7 @@ export function displayCategories(categories) {
     function showCategoryItems (event) {
         const categoryName = event.target.dataset.categoryId;
         const targetGoods = GOODS.filter(({category}) => category === categoryName);
-        const goodsBlock = document.querySelector('.goodsBlock');
-        const infBlock = document.querySelector('.info-block');
-        if (infBlock) {
-            infBlock.remove();
-        }
-        if (goodsBlock) {
-            goodsBlock.remove();
-        }
-
+        clearBlocks(['.info-block', '.goodsBlock']);
         displayGoods(targetGoods);
     };
 
@@ -50,11 +42,8 @@ export function displayGoods(goods) {
         brandGoods.setAttribute('data-good-id', good.id);
 
         brandGoods.addEventListener('click', (event) => {
-            const goodInfo = event.target.dataset.goodId;
-            const infBlock = document.querySelector('.info-block');
-            if (infBlock) {
-                infBlock.remove();
-            }
+            const goodInfo = event.currentTarget.dataset.goodId;
+            clearBlocks('.info-block');
             displayInfoGoods(GOODS[goodInfo - 1]);
         });
 
@@ -76,7 +65,6 @@ export function displayInfoGoods(good) {
     infoBlock.classList.add('info-block','blockShop__blocks-items');
     function buyHandler() {
         modalIcon(good);
-        clearBlocks();
     };
 
     infoBlock.innerHTML = `

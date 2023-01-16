@@ -1,4 +1,4 @@
-import getLocalStorage from "../LS/getLocalStorage.js";
+import {LStorage} from "../LS/LStorage.js";
 
 export function btnBasket () {
     const buttonBasket = document.querySelector('.btn-basket');
@@ -7,7 +7,7 @@ export function btnBasket () {
     const listOrders = document.querySelector('.order-list');
 
     buttonBasket.addEventListener('click', () => {
-        const ordersFromLS = getLocalStorage()
+        const ordersFromLS = LStorage.get('order');
         if (ordersFromLS.length === 0) {
             blockMessage.classList.toggle('form-none');
         }

@@ -1,8 +1,11 @@
-export default function clearBlocks() {
-    const infoBlock = document.querySelector('.info-block');
-    const goodsBlock = document.querySelector('.goodsBlock');
-    if(infoBlock && goodsBlock) {
-        goodsBlock.remove()
-        infoBlock.remove()
+export default function clearBlocks(removeBlock) {
+    if (!Array.isArray(removeBlock)) {
+        removeBlock = [removeBlock];
     }
+    removeBlock.map((block) => {
+        const blockElem = document.querySelector(block);
+        if (blockElem) {
+            blockElem.remove();
+        }
+    })
 }

@@ -1,4 +1,4 @@
-export function formSaveInfo () {
+export function getFormSaveInfo () {
     const nameLastname = document.querySelector('.nameLastname');
     const city = document.querySelector('select');
     const addr = document.querySelector('.newPost');
@@ -6,32 +6,26 @@ export function formSaveInfo () {
     const amount = document.querySelector('.amount');
     const commentary = document.querySelector('textarea');
 
-    function finishPayment() {
-        let paymentValue = '';
-        payment.forEach((radio) => {
-            if (radio.checked) {
-                paymentValue = radio.value;
-            }
-            return paymentValue;
-        });
-
-        if (paymentValue === 'cash') {
-            return 'Оплата наличкой';
-        } else if (paymentValue === 'card'){
-            return 'Оплата картой';
-        } else {
-            return 'Вы не выбрали спозоб оплаты';
-        }
-    }
+    const payMethod = payment.find(({checked}) => checked)?.value || null;
 
     return {
         name: nameLastname.value,
         city: city.value ,
         post: addr.value,
-        payMethod: finishPayment(),
+        payMethod,
         amount: amount.value,
         comment: commentary.value
         };
+}
+function getPaymentMethodText (payMethod) {
+    switch (payMethod) {
+        case 'cash':
+            return 'Оплата наличкой';
+        case 'card':
+            return 'Отлата картой';
+        default:
+            return 'Вы не выбрали способ оплаты';
+    }
 }
 export function displayFormInfo ({name, city, post, payMethod, amount, comment}, good) {
     const formInfo = document.createElement('div');
@@ -54,7 +48,7 @@ export function displayFormInfo ({name, city, post, payMethod, amount, comment},
     finishNovaPost.innerText = `Отделение Новой Почты: ${post}`;
     finishAmount.innerText = `Кол-во: ${amount} единиц`;
     finishCommentary.innerText = `Коментарий к заказу: ${comment}`;
-    finalPay.innerText = payMethod
+    finalPay.innerText = getPaymentMethodText(payMethod);
 
     formInfo.append(productInfo);
     formInfo.append(finishNameLastName);

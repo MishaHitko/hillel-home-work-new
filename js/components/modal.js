@@ -1,5 +1,5 @@
-import {displayFormInfo, formSaveInfo} from './formSaveInfo.js'
-import setLocalStorage from "../LS/setLocalStorage.js";
+import {displayFormInfo, getFormSaveInfo} from './getFormSaveInfo.js'
+import {LStorage} from "../LS/LStorage.js";
 
 export function modalIcon (good) {
     const modalContainer = document.createElement('div');
@@ -22,12 +22,12 @@ export function modalIcon (good) {
     form.onsubmit = e => {
         e.preventDefault();
         const dateNow = new Date().toLocaleString();
-        const formData = formSaveInfo();
+        const formData = getFormSaveInfo();
         const formInfo = displayFormInfo(formData, good);
         form.classList.remove('form-on');
         form.classList.add('form-none');
         modalBody.append(formInfo);
-        setLocalStorage({dateNow, ...good, ...formData});
+        LStorage.set('order', {dateNow, ...good, ...formData});
     }
 
     form.oninput = ({target: input}) => {

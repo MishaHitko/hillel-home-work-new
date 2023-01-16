@@ -1,8 +1,7 @@
-import getLocalStorage from "../LS/getLocalStorage.js";
-import setLocalStorage from "../LS/setLocalStorage.js";
+import {LStorage} from "../LS/LStorage.js";
 
 export function renderListOrders () {
-    const ordersFromLS = getLocalStorage()
+    const ordersFromLS = LStorage.get('order');
     const listOrders = document.querySelector('.order-list');
 
     ordersFromLS.map((order) => {
@@ -25,10 +24,10 @@ export function renderListOrders () {
            orderElemInfo.classList.toggle('form-none');
         });
         deleteOrder.addEventListener('click', () => {
-            const oldOrders = getLocalStorage();
+            const oldOrders = LStorage.get('order');
             const newOrders = oldOrders.filter(oldOrder => oldOrder.id !== order.id);
             localStorage.removeItem('order');
-            setLocalStorage(newOrders);
+            LStorage.set('order', newOrders);
             orderElem.remove();
             if (newOrders.length === 0) {
                 const blockMessage = document.querySelector('.basket-message');
