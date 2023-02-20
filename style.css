@@ -1,0 +1,16 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.post {
+    text-align: center;
+    margin: 10px;
+    width: 25%;
+    border: 1px solid skyblue;
+    background-color: skyblue;
+    padding: 10px 20px;
+}
+.block-comments {
+    display: flex;
+}
