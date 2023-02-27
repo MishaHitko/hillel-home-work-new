@@ -1,8 +1,9 @@
 import {LStorage} from "../LS/LStorage.js";
 import {closeModal} from "./closeModal.js";
-import {modal} from "./modal.js";
-import {saveInfoUsers} from "./saveInfoUsers.js";
+import {modal, showRemoveForm, showUserForm} from "./modal.js";
+import {setFormInfo} from "./saveInfoUsers.js";
 import {formAddEdit} from "./formAddEdit.js";
+import {closeForm} from "./closeForm.js";
 
 export function createUsers() {
     const users = LStorage.get('users')
@@ -10,7 +11,7 @@ export function createUsers() {
     buttonAdd.classList.add('button');
     buttonAdd.innerText = 'Add';
 
-    users.forEach((user, index) => {
+    users.forEach((user) => {
         const userBlock = document.createElement('div');
         const buttonEdit = document.createElement('button');
         const buttonRemove = document.createElement('button');
@@ -46,22 +47,26 @@ export function createUsers() {
 }
 
 function clickView(user) {
+    closeForm();
     closeModal();
-    modal(user, 'view button');
+    modal(showUserForm(user));
 }
 
 function clickEdit(user) {
+    closeForm();
     closeModal();
-    saveInfoUsers(user);
-    formAddEdit(user, 'edit');
+    setFormInfo(user);
+    formAddEdit(user, true);
 }
 
 function clickRemove(user, userBlock) {
+    closeForm();
     closeModal();
-    modal(user, 'remove button', userBlock);
+    modal(showRemoveForm(user, userBlock));
 }
 
 function clickAdd() {
+    closeForm();
     closeModal();
     formAddEdit();
 }

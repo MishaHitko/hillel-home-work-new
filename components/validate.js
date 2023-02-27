@@ -1,82 +1,73 @@
 export function validate() {
     const errorValidOld = document.querySelectorAll('.text-error');
-    if(errorValidOld) {
+    if (errorValidOld) {
         [...errorValidOld].map((value) => value.remove());
     }
 
-    const name = document.querySelector('input[name="name"]');
-    const age = document.querySelector('input[name="age"]');
-    const email = document.querySelector('input[name="email"]');
-    const tel = document.querySelector('input[name="tel"]');
-    const bank = document.querySelector('input[name="bank"]');
+    const nameInput = document.querySelector('input[name="name"]');
+    const ageInput = document.querySelector('input[name="age"]');
+    const emailInput = document.querySelector('input[name="email"]');
+    const telInput = document.querySelector('input[name="tel"]');
+    const bankInput = document.querySelector('input[name="bank"]');
 
-    const errorValidName = document.createElement('p');
-    errorValidName.innerText = 'Некорректно введено имя!';
-    errorValidName.classList.add('text-error');
+    const inputs = [nameInput, ageInput, emailInput, telInput, bankInput];
 
-    name.oninput = event => {
-        const validName = (nameUser) => /^[А-Я A-Z]+$/i.test(nameUser);
-        if(!validName(name.value)) {
-            const blockName = name.closest('div');
-            blockName.append(errorValidName);
-        } else {
-            errorValidName.remove();
+    const FORM_VALID = {
+        name: {
+            reqExp: /^[А-Я A-Z]+$/i,
+            input: nameInput,
+            errorMessage: 'Некорректно введено имя!'
+        },
+        age: {
+            reqExp: /^[0-9]{1,2}$/i,
+            input: ageInput,
+            errorMessage: 'Некорректно введен возраст!'
+        },
+        email: {
+            reqExp: /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/,
+            input: emailInput,
+            errorMessage: 'Некорректно введен имейл!'
+        },
+        tel: {
+            reqExp: /^[0-9]{10,13}$/i,
+            input: telInput,
+            errorMessage: 'Некорректно введен номер телефона!'
+        },
+        bank: {
+            reqExp: /^[0-9]{16}$/i,
+            input: bankInput,
+            errorMessage: 'Некорректно введен номер банковской карты!'
+        }
+    };
+
+    const isFormValid = formData => {
+
+        for (let key in formData) {
+            const {reqExp, input, errorMessage} = formData[key];
+
+            const buttonSave = document.querySelector('.button_form_save')
+            const errorValid = document.querySelector('.text-error');
+
+            if (!reqExp.test(input.value)) {
+                if(!errorValid) {
+                    const errorValid = document.createElement('p');
+                    errorValid.classList.add('text-error');
+                    errorValid.innerText = errorMessage;
+                    const blockName = input.closest('div');
+                    blockName.append(errorValid);
+                }
+                buttonSave.disabled = true;
+            } else {
+                if(errorValid) {
+                    errorValid.remove();
+                }
+                buttonSave.disabled = false;
+            }
         }
     }
-
-    const errorValidAge = document.createElement('p');
-    errorValidAge.innerText = 'Некорректно введен возраст!';
-    errorValidAge.classList.add('text-error');
-
-    age.oninput = event => {
-        const validAge = (ageUser) =>  /^[0-9]{1,2}$/i.test(ageUser);
-        if(!validAge(age.value)) {
-            const blockName = age.closest('div');
-            blockName.append(errorValidAge);
-        } else {
-            errorValidAge.remove();
+    inputs.forEach((input) => {
+        input.onchange = () => {
+            isFormValid(FORM_VALID);
         }
-    }
-
-    const errorValidEmail = document.createElement('p');
-    errorValidEmail.innerText = 'Некорректно введен имейл!';
-    errorValidEmail.classList.add('text-error');
-
-    email.oninput = event => {
-        const validEmail = (emailUser) =>  /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/.test(emailUser);
-        if(!validEmail(email.value)) {
-            const blockName = email.closest('div');
-            blockName.append(errorValidEmail);
-        } else {
-            errorValidEmail.remove();
-        }
-    }
-
-    const errorValidTel = document.createElement('p');
-    errorValidTel.innerText = 'Некорректно введен номер телефона!';
-    errorValidTel.classList.add('text-error');
-
-    tel.oninput = event => {
-        const validTel = (telUser) =>  /^[0-9]{10,13}$/i.test(telUser);
-        if(!validTel(tel.value)) {
-            const blockName = tel.closest('div');
-            blockName.append(errorValidTel);
-        } else {
-            errorValidTel.remove();
-        }
-    }
-
-    const errorValidBank = document.createElement('p');
-    errorValidBank.innerText = 'Некорректно введен номер банковской карты!';
-    errorValidBank.classList.add('text-error');
-
-    bank.oninput = event => {
-        const validBank = (bankUser) =>  /^[0-9]{16}$/i.test(bankUser);
-        if(!validBank(bank.value)) {
-            const blockName = bank.closest('div');
-            blockName.append(errorValidBank);
-        } else {
-            errorValidBank.remove();
-        }
-    }
+    })
 }
