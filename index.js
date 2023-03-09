@@ -30,8 +30,7 @@ class Hamburger {
 
     constructor(size, stuffing) {
         this.size = size;
-        this.stuffing = stuffing;
-        this.toppings = [];
+        this.toppings = [stuffing];
     }
 
     addTopping(topping) {
@@ -39,25 +38,11 @@ class Hamburger {
     }
 
     calculatePrice() {
-        let toppingsPrice = 0;
-
-        this.toppings.reduce((acc, topping) => {
-            acc += topping.price;
-            toppingsPrice = acc
-            return toppingsPrice;
-        },0)
-
-        return this.size.price + this.stuffing.price + toppingsPrice;
+        const toppingsPrice = this.toppings.reduce((acc, {price}) => acc + price,0);
+        return this.size.price + toppingsPrice;
     }
     calculate() {
-        let toppingsCalories = 0;
-
-        this.toppings.reduce((acc, topping) => {
-            acc += topping.calories;
-            toppingsCalories = acc
-            return toppingsCalories;
-        },0)
-
-        return this.size.calories + this.stuffing.calories + toppingsCalories;
+        const toppingsCalories = this.toppings.reduce((acc, {calories}) => acc + calories,0);
+        return this.size.calories + toppingsCalories;
     }
 }
