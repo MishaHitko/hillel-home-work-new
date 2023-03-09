@@ -2,10 +2,21 @@ import {LStorage} from "../LS/LStorage.js";
 
 export function modal(modalBody) {
     const modal = document.createElement('div');
+    const modalCloseView = document.createElement('p');
+
     modal.classList.add('modal');
+    modalCloseView.classList.add('modal__close');
+
+    const onCloseView = () => {
+        modal.remove();
+    }
+    modalCloseView.innerText = 'x';
+    modalCloseView.addEventListener('click', onCloseView);
+
+    modal.append(modalBody);
+    modalBody.append(modalCloseView);
 
     document.body.append(modal);
-    modal.append(modalBody);
 }
 export function showUserForm(user) {
     const modalBody = document.createElement('div');
@@ -25,12 +36,6 @@ export function showUserForm(user) {
             <p>Время: ${user.dateSave}</p>
              `;
 
-    modalCloseView.innerText = 'x';
-    modalCloseView.addEventListener('click', () => {
-        const modal = document.querySelector('.modal');
-        modal.remove();
-    })
-    modalBody.append(modalCloseView);
     return modalBody;
 }
 export function showRemoveForm(user, userBlock) {

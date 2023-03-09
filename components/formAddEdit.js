@@ -19,13 +19,12 @@ export function formAddEdit(user,isEditForm) {
         const newUser = setFormInfo();
         modalAdd.classList.add('modal_none');
 
-        if(isEditForm) {
-            const oldUsers = LStorage.get('users');
-            const indexOldUser = oldUsers.findIndex(oldUser => oldUser.id === user.id);
-            oldUsers.splice(indexOldUser, 1, newUser);
-            LStorage.set('users', oldUsers)
-        } else {
-                LStorage.set('users', newUser);
-        }
+        const oldUsers = LStorage.get('users');
+        const nextUsers = isEditForm ?
+            oldUsers.map(oldUsers => oldUsers.id === user.id ? newUser : oldUsers) :
+            [...oldUsers, newUser];
+
+        LStorage.set('users', nextUsers);
+
     }
 }

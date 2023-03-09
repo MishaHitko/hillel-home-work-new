@@ -1,7 +1,8 @@
-export function setFormInfo(user) {
-    if(user) {
-        getFormFields(user)
-    }
+import {getFormInputs} from "./getFormInputs.js";
+
+const [name, password, age, email, tel, bank] = getFormInputs();
+
+export function setFormInfo() {
     return {
         name: name.value,
         password: password.value,
@@ -14,14 +15,7 @@ export function setFormInfo(user) {
     }
 }
 
-const name = document.querySelector('input[name="name"]');
-const password = document.querySelector('input[name="password"]');
-const age = document.querySelector('input[name="age"]');
-const email = document.querySelector('input[name="email"]');
-const tel = document.querySelector('input[name="tel"]');
-const bank = document.querySelector('input[name="bank"]');
-
-function getFormFields(user) {
+export function getFormFields(user) {
     name.value = user.name
     password.value = user.password
     age.value = user.age

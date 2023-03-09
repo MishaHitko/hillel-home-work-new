@@ -1,7 +1,7 @@
 import {LStorage} from "../LS/LStorage.js";
 import {closeModal} from "./closeModal.js";
 import {modal, showRemoveForm, showUserForm} from "./modal.js";
-import {setFormInfo} from "./saveInfoUsers.js";
+import {getFormFields} from "./saveInfoUsers.js";
 import {formAddEdit} from "./formAddEdit.js";
 import {closeForm} from "./closeForm.js";
 
@@ -55,7 +55,7 @@ function clickView(user) {
 function clickEdit(user) {
     closeForm();
     closeModal();
-    setFormInfo(user);
+    getFormFields(user);
     formAddEdit(user, true);
 }
 
