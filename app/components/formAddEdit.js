@@ -7,17 +7,17 @@ export function formAddEdit(user,isEditForm) {
     const modalAdd = document.querySelector('.modal-form');
     const form = modalAdd.querySelector('.modal__form');
     const buttonFormClose = document.querySelector('.button_form_close');
-    modalAdd.classList.remove('modal_none');
+    modalAdd.classList.remove('modal-form_none');
     if (!isEditForm) {
         form.reset();
     }
 
     buttonFormClose.addEventListener('click', () => {
-        modalAdd.classList.add('modal_none');
+        modalAdd.classList.add('modal-form_none');
     });
     form.onsubmit = () => {
         const newUser = setFormInfo();
-        modalAdd.classList.add('modal_none');
+        modalAdd.classList.add('modal-form_none');
 
         const oldUsers = LStorage.get('users');
         const nextUsers = isEditForm ?

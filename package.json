@@ -1,0 +1,29 @@
+{
+  "name": "lesson-20-new",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app/index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "@babel/core": "^7.21.3",
+    "@babel/preset-env": "^7.20.2",
+    "gulp": "^4.0.2",
+    "gulp-babel": "^8.0.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-sass": "^5.1.0",
+    "sass": "^1.59.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MishaHitko/hillel-home-work-new.git"
+  },
+  "author": "Misha Hitko",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MishaHitko/hillel-home-work-new/issues"
+  },
+  "homepage": "https://github.com/MishaHitko/hillel-home-work-new#readme"
+}

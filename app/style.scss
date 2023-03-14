@@ -1,0 +1,78 @@
+.button {
+  cursor: pointer;
+  border: none;
+  padding: 5px 15px;
+  margin: 10px;
+  &_form_save:hover {
+    background-color: green;
+  }
+  &_form_close:hover {
+    background-color: red;
+  }
+}
+.userBlock {
+  display: flex;
+  align-items: center;
+  &__text {
+    margin: 0 10px;
+  }
+}
+.modal {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &__body {
+    background-color: skyblue;
+    position: fixed;
+    padding: 20px 100px;
+    border-radius: 10px;
+    top: 20px;
+  }
+  &__close {
+    cursor: pointer;
+    font-size: 20px;
+    position: absolute;
+    top: -15px;
+    right: 15px;
+  }
+  &__button {
+    cursor: pointer;
+    border: none;
+    padding: 5px 10px;
+    margin: 10px;
+    &_remove:hover {
+      background-color: red;
+    }
+    &_noRemove:hover {
+      background-color: green;
+    }
+  }
+  &__form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  &__input-block {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0;
+    align-items: center;
+  }
+  &_none {
+    display: none;
+  }
+}
+.text-error {
+  color: red;
+  margin: 0;
+}
+.modal-form {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &_none {
+    display: none;
+  }
+}
