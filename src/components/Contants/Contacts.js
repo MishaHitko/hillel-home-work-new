@@ -1,20 +1,24 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
+import React from 'react';
 
-function mapStateToProps(state) {
-    return {};
-}
-
-class Contacts extends Component {
-    render() {
-        return (
-            <div>
-
-            </div>
-        );
+function Contacts ({contacts, setContacts}) {
+    const deleteContact = (id) => {
+        setContacts(contacts.filter((contact) => contact.id !== id));
     }
+        return (
+            <table>
+                <tbody>
+                {contacts && contacts.map((contact) =>  (
+                    <tr key={contact.id}>
+                        <td>{contact.name}</td>
+                        <td>{contact.username}</td>
+                        <td>{contact.phone}</td>
+                        <td>{contact.email}</td>
+                        <td><button onClick={() => deleteContact(contact.id)}>Delete</button></td>
+                    </tr>
+                ))}
+                </tbody>
+            </table>
+        );
 }
 
-export default connect(
-    mapStateToProps,
-)(Contacts);
+export default Contacts;
