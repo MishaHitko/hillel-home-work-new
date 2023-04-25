@@ -2,35 +2,32 @@ import React, {useState} from 'react';
 import './Form.css';
 
 function Form ({closeForm, setContacts}) {
-        const [newContactName, setNewContactName] = useState('');
-        const [newContactUsername, setNewContactUsername] = useState('');
-        const [newContactPhone, setNewContactPhone] = useState('');
-        const [newContactEmail, setNewContactEmail] = useState('');
+        const [form, setForm] = useState({name: '', phone: '', username: '', email: ''});
+
+        const onChange = ({target: {value, name}}) => {
+                console.log(value)
+                console.log(name)
+                setForm({...form, [name]: value});
+        }
 
         const handleSubmit = (event) => {
                 event.preventDefault();
-                const newContact = {
-                        name: newContactName,
-                        username: newContactUsername,
-                        phone: newContactPhone,
-                        email: newContactEmail,
-                        id: Math.random()
-                }
-                setContacts((contacts) => {
-                    return [...contacts, newContact]
-                });
+                setContacts((contacts) => ([
+                        ...contacts, {...form, id: Math.random()}
+                ]));
                 closeForm(false);
         }
+        console.log(form);
         return (
             <form className={'form'} onSubmit={handleSubmit}>
                 <p>Name:</p>
-                <input onChange={(event) => setNewContactName(event.target.value)}/>
+                <input name={'name'} onChange={(event) => onChange(event)}/>
                 <p>Username:</p>
-                <input onChange={(event) => setNewContactUsername(event.target.value)}/>
+                <input name={'username'} onChange={(event) => onChange(event)}/>
                 <p>Phone:</p>
-                <input onChange={(event) => setNewContactPhone(event.target.value)}/>
+                <input name={'phone'} onChange={(event) => onChange(event)}/>
                 <p>Email:</p>
-                <input onChange={(event) => setNewContactEmail(event.target.value)}/>
+                <input name={'email'} onChange={(event) => onChange(event)}/>
                 <input type={"submit"} value={'Save'}/>
                 <button onClick={() => closeForm(false)}>Cancel</button>
             </form>

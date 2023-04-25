@@ -1,19 +1,19 @@
 import React from 'react';
 
 function Contacts ({contacts, setContacts}) {
-    const deleteContact = (id) => {
-        setContacts(contacts.filter((contact) => contact.id !== id));
+    const deleteContact = (idContact) => () => {
+        setContacts(contacts.filter(({id}) => idContact !== id));
     }
         return (
             <table>
                 <tbody>
-                {contacts && contacts.map((contact) =>  (
-                    <tr key={contact.id}>
-                        <td>{contact.name}</td>
-                        <td>{contact.username}</td>
-                        <td>{contact.phone}</td>
-                        <td>{contact.email}</td>
-                        <td><button onClick={() => deleteContact(contact.id)}>Delete</button></td>
+                {contacts && contacts.map(({id, name, username, phone, email}) =>  (
+                    <tr key={id}>
+                        <td>{name}</td>
+                        <td>{username}</td>
+                        <td>{phone}</td>
+                        <td>{email}</td>
+                        <td><button onClick={deleteContact(id)}>Delete</button></td>
                     </tr>
                 ))}
                 </tbody>
