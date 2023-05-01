@@ -1,6 +1,7 @@
 import './App.css';
-import Contacts from "./components/Contants/Contacts";
-import Form from "./components/Form/Form";
+import {BrowserRouter, Routes, Route} from "react-router-dom";
+import MainPage from "./components/pages/MainPage";
+import Page from "./components/pages/Page";
 import {useEffect, useState} from "react";
 
 function App() {
@@ -14,11 +15,12 @@ function App() {
     }, [])
 
   return (
-          <div className={'body'}>
-              <Contacts contacts={contacts} setContacts={setContacts}/>
-              <button onClick={() => setOpenForm(true)}>New contact</button>
-              {openForm && (<Form closeForm={setOpenForm} setContacts={setContacts}/>)}
-          </div>
+      <BrowserRouter>
+          <Routes>
+              <Route path="/" element={<MainPage contacts={contacts} openForm={openForm} setContacts={setContacts} setOpenForm={setOpenForm} />} />
+              <Route path="/page" element={<Page setContacts={setContacts} />} />
+          </Routes>
+      </BrowserRouter>
   );
 }
 

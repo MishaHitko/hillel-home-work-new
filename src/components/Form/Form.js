@@ -1,35 +1,62 @@
 import React, {useState} from 'react';
 import './Form.css';
+import {Link, useNavigate} from "react-router-dom";
 
-function Form ({closeForm, setContacts}) {
-        const [form, setForm] = useState({name: '', phone: '', username: '', email: ''});
+
+function Form ({closeForm, setContacts, editContact}) {
+        const [form, setForm] = useState({
+                name: editContact ? editContact.name : '',
+                phone: editContact ? editContact.phone : '',
+                username: editContact ? editContact.username : '',
+                email: editContact ? editContact.email : ''
+        });
+
+        const navigate = useNavigate();
+
 
         const onChange = ({target: {value, name}}) => {
-                console.log(value)
-                console.log(name)
                 setForm({...form, [name]: value});
         }
 
-        const handleSubmit = (event) => {
-                event.preventDefault();
+        const handleSubmit = () => {
+                if(editContact) {
+
+                        setContacts((contacts) => {
+                                    const newContacts = contacts.filter(({id}) => id !== editContact.id)
+                                return [...newContacts, {...form, id: Math.random()}]
+                            });
+
+                        return
+                }
                 setContacts((contacts) => ([
                         ...contacts, {...form, id: Math.random()}
                 ]));
-                closeForm(false);
+
+                !editContact && closeForm(false);
         }
-        console.log(form);
+
+        const onSumbit = event => {
+                event.preventDefault()
+                navigate('/')
+                handleSubmit()
+        }
         return (
-            <form className={'form'} onSubmit={handleSubmit}>
+            <form className={'form'} onSubmit={onSumbit}>
                 <p>Name:</p>
-                <input name={'name'} onChange={(event) => onChange(event)}/>
+                <input value={form.name} name={'name'} onChange={onChange}/>
                 <p>Username:</p>
-                <input name={'username'} onChange={(event) => onChange(event)}/>
+                <input value={form.username} name={'username'} onChange={onChange}/>
                 <p>Phone:</p>
-                <input name={'phone'} onChange={(event) => onChange(event)}/>
+                <input value={form.phone} name={'phone'} onChange={onChange}/>
                 <p>Email:</p>
-                <input name={'email'} onChange={(event) => onChange(event)}/>
-                <input type={"submit"} value={'Save'}/>
-                <button onClick={() => closeForm(false)}>Cancel</button>
+                <input value={form.email}  name={'email'} onChange={onChange}/>
+                <button type={"submit"} value={'Save'}>Save</button>
+                {editContact ? (
+                    <button><Link to={'/'}>Cancel</Link></button>
+                ) :
+                (
+                    <button onClick={() => closeForm(false)}>Cancel</button>
+                )}
             </form>
         );
 }
