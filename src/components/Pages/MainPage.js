@@ -1,7 +1,9 @@
 import Contacts from "../Contants/Contacts";
 import Form from "../Form/Form";
+import {useState} from "react";
 
-function MainPage({setContacts, setOpenForm, contacts, openForm}) {
+function MainPage({setContacts, contacts}) {
+    const [openForm, setOpenForm] = useState(false);
 
     return (
                 <div className={'body'}>

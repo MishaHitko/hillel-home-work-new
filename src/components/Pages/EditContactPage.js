@@ -1,7 +1,7 @@
 import Form from "../Form/Form";
 import {Link, useLocation} from "react-router-dom";
 
-function Page({setContacts}) {
+function EditContactPage({setContacts}) {
     const {state} = useLocation();
 
     return (
@@ -12,4 +12,4 @@ function Page({setContacts}) {
     );
 }
 
-export default Page;
+export default EditContactPage;

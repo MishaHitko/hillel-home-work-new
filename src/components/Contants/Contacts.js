@@ -26,8 +26,7 @@ function Contacts ({contacts, setContacts}) {
                 ))}
                 </tbody>
             </table>
-            {openModal && <Modal contacts={contacts}
-                                 setContacts={setContacts}
+            {openModal && <Modal setContacts={setContacts}
                                  idContact={idContact}
                                  setOpenModal={setOpenModal}/>}
             </>

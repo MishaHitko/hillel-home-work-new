@@ -1,9 +1,12 @@
 import './Modal.css';
 
-function Modal({contacts, setContacts, idContact, setOpenModal}) {
+function Modal({setContacts, idContact, setOpenModal}) {
     const deleteContact = () => {
-        setContacts(contacts.filter(({id}) => idContact !== id));
+        setContacts(prevContacts => prevContacts.filter(({id}) => idContact !== id));
         setOpenModal(false);
+    }
+    const canselDeleting = () => {
+        setOpenModal(false)
     }
         return (
             <div className={'modal'}>
@@ -11,7 +14,7 @@ function Modal({contacts, setContacts, idContact, setOpenModal}) {
                     <p>Are you sure you want to delete a contact?</p>
                     <div>
                         <button className={'modal__btn'} onClick={deleteContact}>Yes</button>
-                        <button className={'modal__btn'} onClick={() => setOpenModal(false)}>No</button>
+                        <button className={'modal__btn'} onClick={canselDeleting}>No</button>
                     </div>
                 </div>
             </div>

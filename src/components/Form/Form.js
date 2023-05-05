@@ -4,44 +4,41 @@ import {Link, useNavigate} from "react-router-dom";
 
 
 function Form ({closeForm, setContacts, editContact}) {
-        const [form, setForm] = useState({
-                name: editContact ? editContact.name : '',
-                phone: editContact ? editContact.phone : '',
-                username: editContact ? editContact.username : '',
-                email: editContact ? editContact.email : ''
-        });
+        const DEFAULT_FORM_VALUES = {
+                name: '',
+                phone: '',
+                username: '',
+                email: ''
+        };
+
+        const [form, setForm] = useState(editContact ?  editContact : DEFAULT_FORM_VALUES);
 
         const navigate = useNavigate();
-
 
         const onChange = ({target: {value, name}}) => {
                 setForm({...form, [name]: value});
         }
 
-        const handleSubmit = () => {
-                if(editContact) {
+        const editContacts = (contacts, newContact, editContactId) => (
+            contacts.map(contact => (contact.id === editContactId ? {...newContact, id: crypto.randomUUID()} : contact
+            ))
+        );
 
-                        setContacts((contacts) => {
-                                    const newContacts = contacts.filter(({id}) => id !== editContact.id)
-                                return [...newContacts, {...form, id: Math.random()}]
-                            });
-
-                        return
-                }
-                setContacts((contacts) => ([
-                        ...contacts, {...form, id: Math.random()}
-                ]));
-
-                !editContact && closeForm(false);
+        const  onClose = () => {
+            editContact ?  navigate('/') : closeForm(false);
         }
-
-        const onSumbit = event => {
+        const handleSubmit = event => {
                 event.preventDefault()
-                navigate('/')
-                handleSubmit()
+               setContacts((contacts) => (
+                   editContact ?
+                       editContacts(contacts, form, editContact.id) :
+                       [...contacts, {...form, id: Math.random()}]
+                ));
+                onClose();
         }
+
         return (
-            <form className={'form'} onSubmit={onSumbit}>
+            <form className={'form'} onSubmit={handleSubmit}>
                 <p>Name:</p>
                 <input value={form.name} name={'name'} onChange={onChange}/>
                 <p>Username:</p>
@@ -51,12 +48,7 @@ function Form ({closeForm, setContacts, editContact}) {
                 <p>Email:</p>
                 <input value={form.email}  name={'email'} onChange={onChange}/>
                 <button type={"submit"} value={'Save'}>Save</button>
-                {editContact ? (
-                    <button><Link to={'/'}>Cancel</Link></button>
-                ) :
-                (
-                    <button onClick={() => closeForm(false)}>Cancel</button>
-                )}
+                <button onClick={onClose}>Cancel</button>
             </form>
         );
 }
